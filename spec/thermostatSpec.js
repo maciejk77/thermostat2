@@ -32,11 +32,46 @@ describe('Thermostat', function(){
 
     it('cannot lower temperature below 10', function(){
       thermostat.temperature = 10;
-      expect( function(){ thermostat.decrease(); }).toThrow(new Error("Min temperature is 10")); 
+      expect( function(){ thermostat.decrease(); }).toThrow(new Error("Min temperature is 10"));
+    });
 
+    it('allows max temp 25, when powersaving is on', function(){
+      thermostat.powersaving = true;
+      thermostat.temperature = 25;
+      expect( function(){ thermostat.increase(); }).toThrow(new Error("Max 25 degrees in powersaving mode"));
+    });
 
+    it('allows max temp 35, when powersaving is off', function(){
+      thermostat.powersaving = false;
+      thermostat.temperature = 35;
+      expect( function(){ thermostat.increase(); }).toThrow(new Error("Max 35 degrees if powersaving is off"));
     });
 
   });
+  
+  describe('changes color depending on the temperature', function(){
+
+    it('changes color to green, if temperature is lower than 18', function(){
+      thermostat.temperature = 18;
+      thermostat.decrease();
+      expect(thermostat.tempColor).toEqual("Green");      
+    });
+
+    it('changes color to yellow, if temperature is between 18 and 25', function(){
+      thermostat.temperature = 26;
+      thermostat.decrease();
+      expect(thermostat.tempColor).toEqual("Yellow"); 
+    });
+
+    // it('changes color to red, if temperature is higher than 25', function(){
+    //   thermostat.temperature = 25;
+    //   thermostat.increase();
+    //   expect(thermostat.tempColor).toEqual("Red"); 
+    // });
+    
+  });
 
 });
+
+
+
