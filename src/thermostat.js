@@ -1,7 +1,7 @@
 var Thermostat = function(){
   this.temperature = 20;
   this.powersaving = true;
-  this.tempColor = "Green";
+  this.tempColor = "Yellow";
 };
 
 Thermostat.prototype.increase = function() {
@@ -11,7 +11,9 @@ Thermostat.prototype.increase = function() {
   };
   if(this.powersaving === false && this.temperature > 35){
     throw new Error("Max 35 degrees if powersaving is off");
+
   };
+  this.changeColor;
 };
 
 Thermostat.prototype.decrease = function() {
@@ -26,13 +28,15 @@ Thermostat.prototype.resetTemp = function() {
 };
 
 Thermostat.prototype.changeColor = function() {
-  if(this.temperature < 18){
-    this.tempColor = "Green";
+  if(this.temperature < 18){ 
+    this.tempColor = "Green" 
   };
-  // if((this.temperature) >= 18) || (this.temperature) <= 25) {
-  //   this.tempColor = "Yellow";
-  // };
-  // if(this.temperature > 25){
-  //   this.tempColor = "Red";
-  // };
+
+  if(this.temperature >= 18 && this.temperature <= 25){
+    this.tempColor = "Yellow";
+  };
+
+  if(this.temperature > 25){ 
+    this.tempColor = "Red"
+  };
 };

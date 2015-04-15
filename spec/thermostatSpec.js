@@ -4,7 +4,7 @@ describe('Thermostat', function(){
         thermostat = new Thermostat();
     });
 
-  describe('can change temperature', function(){
+  describe('can change temperature,', function(){
 
     it('can have a default temperature', function(){
       expect(thermostat.temperature).toEqual(20);
@@ -28,7 +28,7 @@ describe('Thermostat', function(){
   
   });
 
-  describe('can have max or min temperature', function(){
+  describe('can have max or min temperature,', function(){
 
     it('cannot lower temperature below 10', function(){
       thermostat.temperature = 10;
@@ -49,25 +49,29 @@ describe('Thermostat', function(){
 
   });
   
-  describe('changes color depending on the temperature', function(){
+  describe('changes color depending on the temperature,', function(){
 
     it('changes color to green, if temperature is lower than 18', function(){
       thermostat.temperature = 18;
       thermostat.decrease();
+      thermostat.changeColor();
       expect(thermostat.tempColor).toEqual("Green");      
     });
 
     it('changes color to yellow, if temperature is between 18 and 25', function(){
-      thermostat.temperature = 26;
+      thermostat.temperature = 25;
       thermostat.decrease();
+      thermostat.changeColor();
       expect(thermostat.tempColor).toEqual("Yellow"); 
     });
 
-    // it('changes color to red, if temperature is higher than 25', function(){
-    //   thermostat.temperature = 25;
-    //   thermostat.increase();
-    //   expect(thermostat.tempColor).toEqual("Red"); 
-    // });
+    it('changes color to red, if temperature is higher than 25', function(){
+      thermostat.powersaving = false;
+      thermostat.temperature = 25;
+      thermostat.increase();
+      thermostat.changeColor();
+      expect(thermostat.tempColor).toEqual("Red"); 
+    });
     
   });
 
